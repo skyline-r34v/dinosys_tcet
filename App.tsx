@@ -1,17 +1,18 @@
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import firestore from '@react-native-firebase/firestore';
+// import firestore from '@react-native-firebase/firestore';
+
 import auth from '@react-native-firebase/auth';
 const EmailPassAuth = () => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [Phone, setPhone] = useState(undefined);
 
   const CreateUser = async () => {
     auth()
       .createUserWithEmailAndPassword(Email, Password)
       .then(() => {
         console.warn('User account created & signed in!');
-        <Home />;
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -44,6 +45,20 @@ const EmailPassAuth = () => {
         placeholder="Enter Email"
         value={Email}
         onChangeText={text => setEmail(text)}
+        style={{
+          width: '80%',
+          height: 50,
+          borderWidth: 1,
+          borderRadius: 10,
+          borderColor: 'blue',
+          paddingLeft: 20,
+          marginBottom: 20,
+        }}
+      />
+      <TextInput
+        placeholder="Enter Mobile No."
+        value={Phone}
+        onChangeText={text => setPhone(text)}
         style={{
           width: '80%',
           height: 50,
